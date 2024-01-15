@@ -41,6 +41,7 @@ final getIsAuthenticatedProvider = FutureProvider<bool>(
   (ref) async {
     final prefs = await ref.watch(sharedPrefProvider);
     ref.watch(setAuthStateProvider);
+
     return prefs.getBool(IS_AUTHENTICATED_KEY) ?? false;
   },
 );

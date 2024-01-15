@@ -74,7 +74,7 @@ final authenticationHandlerProvider = StateProvider<AuthenticationHandler>(
 
 final authLoginProvider = FutureProvider.family<bool, AuthArgs>(
   (ref, authArgs) async {
-    return Future.delayed(const Duration(seconds: 2), () async {
+    return Future.delayed(const Duration(seconds: 1), () async {
       final authResponse = await ref.watch(authenticationHandlerProvider).login(
             authArgs,
           );
@@ -87,6 +87,7 @@ final authLoginProvider = FutureProvider.family<bool, AuthArgs>(
       } else {
         ref.read(authErrorMessageProvider.notifier).state =
             'Error occurred while login with code: ${authResponse.statusCode}';
+            return false;
       }
 
       return isAuthenticated;

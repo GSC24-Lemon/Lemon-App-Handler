@@ -240,11 +240,12 @@ class LoginScreen extends HookConsumerWidget {
                       email: emailController.text,
                       password: passwordController.text,
                     );
-                    ref.read(authLoginProvider(authArgs));
+                    final isAuth = ref.read(authLoginProvider(authArgs));
                     final isAuthenticated =
                         ref.read(getIsAuthenticatedProvider);
+                    FocusManager.instance.primaryFocus?.unfocus();
                     if (isAuthenticated.value!) {
-                      Navigator.pushNamed(context, 'Home');
+                      Navigator.pushNamed(context, '/home');
                     }
                   }
                 },

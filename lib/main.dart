@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lemon_app_handler_new/screens/help_screen.dart';
 import 'package:lemon_app_handler_new/screens/helper_screen.dart';
 import 'package:lemon_app_handler_new/screens/history_screen.dart';
+import 'package:lemon_app_handler_new/screens/navigator_screens.dart';
 import 'package:lemon_app_handler_new/screens/register_screen.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -50,7 +51,7 @@ class MyAppState extends ConsumerState<MyApp> {
           )
           .when(
             data: (bool isAuthenticated) =>
-                isAuthenticated ? HomeScreen() : const RegisterScreen(),
+                isAuthenticated ? NavigatorScreen() : const RegisterScreen(),
             loading: () {
               return const Scaffold(
                 body: Center(
@@ -61,7 +62,7 @@ class MyAppState extends ConsumerState<MyApp> {
             error: (error, stacktrace) => LoginScreen(),
           ),
       routes: {
-        "/home": (context) => const HomeScreen(),
+        "/home": (context) => const NavigatorScreen(),
         "/login": (context) => LoginScreen(),
         "/help": (context) => HelpScreen(),
         "/register": (context) => const RegisterScreen(),
