@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lemon_app_handler_new/screens/help_screen.dart';
+import 'package:lemon_app_handler_new/screens/helper_screen.dart';
+import 'package:lemon_app_handler_new/screens/history_screen.dart';
+import 'package:lemon_app_handler_new/screens/register_screen.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lemon_app_handler_new/states/storage_state.dart';
@@ -47,7 +50,7 @@ class MyAppState extends ConsumerState<MyApp> {
           )
           .when(
             data: (bool isAuthenticated) =>
-                isAuthenticated ?  HelpScreen() : const LoginScreen(),
+                isAuthenticated ? HomeScreen() : const RegisterScreen(),
             loading: () {
               return const Scaffold(
                 body: Center(
@@ -55,12 +58,15 @@ class MyAppState extends ConsumerState<MyApp> {
                 ),
               );
             },
-            error: (error, stacktrace) => const LoginScreen(),
+            error: (error, stacktrace) => LoginScreen(),
           ),
       routes: {
-        "Home": (context) => const HomeScreen(),
-        "Login": (context) => const LoginScreen(),
-        "Help": (context) =>  HelpScreen(),
+        "/home": (context) => const HomeScreen(),
+        "/login": (context) => LoginScreen(),
+        "/help": (context) => HelpScreen(),
+        "/register": (context) => const RegisterScreen(),
+        "/helper": (context) => const HelperScreen(),
+        "/history": (context) => const HistoryScreen(),
       },
     );
   }
